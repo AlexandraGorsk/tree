@@ -1,0 +1,20 @@
+.plus::before{
+    content: '+';
+} 
+.minus::before{
+    content: '-';
+} 
+li{
+    list-style-type: none;
+    cursor: pointer;
+}
+.display-none{
+    display: none;
+}
+.bold{
+    font-weight: 800;
+}
+/* ul {
+    list-style-type: none;
+}
+*/
