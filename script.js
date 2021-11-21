@@ -57,9 +57,11 @@ function createchild(menu, container) {
 		}
 		if (!item.nodes.length) {
 			listItem.onclick = (e) => {
+				console.log(e.target)
 				if (
 					e.target.classList.contains('minus') ||
-					e.target.classList.contains('non-bold')
+					e.target.classList.contains('non-bold') ||
+					e.target.classList.contains('child')
 				) {
 					e.stopPropagation();
 				}
@@ -70,6 +72,7 @@ function createchild(menu, container) {
 					const childli = document.createElement('li');
 					childli.textContent = 'node';
 					childli.classList.add('non-bold');
+					childul.classList.add('child')
 					listItem.append(childul);
 					childul.append(childli);
 				}
