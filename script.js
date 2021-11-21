@@ -3,81 +3,70 @@ const menu = [
 		title: 'node l.1',
 		nodes: [
 			{
-				title: 'node l.2',
+				title: 'node l.1.1',
 				nodes: [
 					{
-						title: 'node l.3',
+						title: 'node l.1.1.1',
 						nodes: [
 							{
-								title: 'node l.4',
+								title: 'node l.1.1.1.1',
 								nodes: [],
 							},
 						],
 					},
 					{
-						title: 'node l.3',
+						title: 'node l.1.1.2',
 						nodes: [],
 					},
 				],
 			},
 			{
-				title: 'node l.2',
+				title: 'node l.1.2',
 				nodes: [],
 			},
 		],
 	},
 	{
-		title: 'node l.1',
+		title: 'node l.2',
 		nodes: [],
 	},
 ];
-// console.log(menu[0].title);
-// console.log(menu[0].nodes);
 
 
-const tree = document.createElement('h1')
-tree.textContent = "Tree"
-document.body.append(tree)
-const childul = document.createElement('ul');
-const childli = document.createElement('li');
-const allli = document.getElementsByTagName('li');
-const ul = document.createElement('ul');
-function createchild(menu) {
-	for (let i = 0; i < menu.length; i++) {
-		const title = menu[i].title;
-		const list = document.createElement('li');
-		list.classList.add('plus');
-		list.classList.add('bold');
-		list.textContent = title;
-		document.body.append(ul);
-		ul.append(list);
-		list.addEventListener(
-			'click',
-			(show = () => {
-				// console.log(menu[i])
-				if (list.classList.contains('plus')) {
-					list.classList.remove('plus');
-					list.classList.add('minus');
-					childul.classList.remove('display-none');
-				} else {
-					list.classList.add('plus');
-					list.classList.remove('minus');
-					childul.classList.add('display-none');
-				}
-				if (!menu[i].nodes.length) {
-					childli.textContent = 'node';
-					ul.append(childul);
-					childul.append(childli);
-				}
-				if (menu[i].nodes.length) {
-					const newmenu = menu[i].nodes;
-					createchild(newmenu);
-				}
-			})
-		);
-	}
+const tree = document.createElement('h1');
+tree.textContent = 'Tree';
+document.body.append(tree);
+const container = document.createElement('div');
+document.body.append(container);
+
+function createchild(menu, container) {
+	const mainul = document.createElement('ul');
+	container.append(mainul);
+	container.onclick = null;
+	menu.forEach((item) => {
+		const listItem = document.createElement('li');
+		listItem.classList.add('plus');
+		listItem.classList.add('bold');
+		listItem.textContent = `${item.title}`;
+		mainul.append(listItem);
+		if (item.nodes.length) {
+			listItem.onclick = () => {
+				listItem.classList.remove('plus');
+				listItem.classList.add('minus');
+				createchild(item.nodes, listItem);
+			};
+		}
+		if (!item.nodes.length) {
+			listItem.onclick = () => {
+				listItem.classList.remove('plus');
+				listItem.classList.add('minus');
+				const childul = document.createElement('ul');
+				const childli = document.createElement('li');
+				childli.textContent = 'node';
+				listItem.append(childul);
+				childul.append(childli);
+			};
+		}
+	});
 }
-createchild(menu)
-
-
-// console.log(menu);
+createchild(menu, container);
