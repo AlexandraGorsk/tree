@@ -32,7 +32,6 @@ const menu = [
 	},
 ];
 
-
 const tree = document.createElement('h1');
 tree.textContent = 'Tree';
 document.body.append(tree);
@@ -57,14 +56,23 @@ function createchild(menu, container) {
 			};
 		}
 		if (!item.nodes.length) {
-			listItem.onclick = () => {
-				listItem.classList.remove('plus');
-				listItem.classList.add('minus');
-				const childul = document.createElement('ul');
-				const childli = document.createElement('li');
-				childli.textContent = 'node';
-				listItem.append(childul);
-				childul.append(childli);
+			listItem.onclick = (e) => {
+				if (
+					e.target.classList.contains('minus') ||
+					e.target.classList.contains('non-bold')
+				) {
+					e.stopPropagation();
+				}
+				else {
+					listItem.classList.remove('plus');
+					listItem.classList.add('minus');
+					const childul = document.createElement('ul');
+					const childli = document.createElement('li');
+					childli.textContent = 'node';
+					childli.classList.add('non-bold');
+					listItem.append(childul);
+					childul.append(childli);
+				}
 			};
 		}
 	});
