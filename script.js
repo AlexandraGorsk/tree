@@ -54,9 +54,9 @@ function createchild(menu, container) {
 				listItem.classList.add('minus');
 				mainul.classList.add(`${listItem.textContent}`);
 				createchild(item.nodes, listItem);
-				if(e.target.classList.contains('minus')){
-					alert('hi')
-				}
+				// if(e.target.classList.contains('minus')){
+				// 	alert('hi')
+				// }
 			};
 		}
 		if (!item.nodes.length) {
